@@ -2,6 +2,7 @@ version: "3"
 
 services:
   db-transpvisback:
+    image: "postgres:latest"
     container_name: db-transpvisback
     ports:
       - "5432:5432"
