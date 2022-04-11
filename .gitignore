@@ -1,3 +1,7 @@
+etc/
+Scripts/
+Share/
+
 # official django
 *.egg-info
 *.pot
