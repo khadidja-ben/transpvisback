@@ -2,7 +2,6 @@ from tkinter.tix import InputOnly
 import joblib
 import os
 import pandas as pd
-from sklearn.feature_extraction.text import CountVectorizer
 from scipy.sparse import csr_matrix
 
 class NaiveBayesClassifier:
