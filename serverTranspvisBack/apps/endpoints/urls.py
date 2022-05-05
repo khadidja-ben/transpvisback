@@ -15,8 +15,8 @@ router.register(r"mlalgorithmstatuses", MLAlgorithmStatusViewSet, basename="mlal
 router.register(r"mlrequests", MLRequestViewSet, basename="mlrequests")
 
 urlpatterns = [
-    url(r"^api/v1/", include(router.urls)),
-    url(r"^api/v1/(?P<endpoint_name>.+)/predict$", PredictView.as_view(), name="predict"),
-    url(r"^api/v1/(?P<endpoint_name>.+)/getalgo$", getAlgoView.as_view(), name="predict"),
+    url(r"^api/v2/", include(router.urls)),
+    url(r"^api/v2/(?P<endpoint_name>.+)/predict$", PredictView.as_view(), name="predict"),
+    url(r"^api/v2/(?P<endpoint_name>.+)/getalgo$", getAlgoView.as_view(), name="predict"),
 
 ]
