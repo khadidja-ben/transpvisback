@@ -1,6 +1,9 @@
+from tkinter.tix import InputOnly
 import joblib
 import os
 import pandas as pd
+from sklearn.feature_extraction.text import CountVectorizer
+from scipy.sparse import csr_matrix
 
 class NaiveBayesClassifier:
     # the constructor which loads preprocessing objects and Naive Bayes object (created with Jupyter notebook)
@@ -9,40 +12,33 @@ class NaiveBayesClassifier:
         TEMPLATE_DIRS = (
             os.path.join(CURRENT_DIR, '../../../machineLearning/')
         )
-        self.encoders = joblib.load(TEMPLATE_DIRS + "encoders.joblib")
         self.model = joblib.load(TEMPLATE_DIRS + "naive_bayes.joblib")
+        self.vectorizer_from_train_data = joblib.load(TEMPLATE_DIRS + "count_vectorizer.joblib")
 
-    #the method which takes as input JSON data, converts it to Pandas DataFrame and apply pre-processing
+    # the method applies pre-processing
     def preprocessing(self, input_data):
-        # JSON to pandas DataFrame
-        input_data = pd.DataFrame(input_data, index=[0])
-        # # convert categoricals
-        # for column in [
-        #     "true",
-        #     "false",
-        # ]:
-        #     categorical_convert = self.encoders[column]
-        #     input_data[column] = categorical_convert.transform(input_data[column])
-
-        return input_data
+        data = self.vectorizer_from_train_data.transform([word.lower() for word in input_data])
+        # JSON to array
+        return csr_matrix.toarray(data)
 
     # the method that calls ML for computing predictions on prepared data
     def predict(self, input_data):
-        return self.model.predict(input_data)
+        return self.model.predict(input_data)[0]
 
     # the method that applies post-processing on prediction values
     def postprocessing(self, input_data):
-        label = "<=50K"
-        if input_data[0]> 0.5:
-            label = ">50K"
-        return {"probability": input_data[0], "label": label, "status": "OK"}
+        return {"label": input_data, "status": "OK"}
 
     # the method that combines: preprocessing, predict and postprocessing and returns JSON object with the response
     def compute_prediction(self, input_data):
         try:
-            # input_data = self.preprocessing(input_data)
-            prediction = self.predict(input_data)[0]
+            print (input_data)
+            input = self.preprocessing(input_data)
+            print ("inpuuut", input)
+            prediction = self.predict(input)
+            print (prediction)
             prediction = self.postprocessing(prediction)
+            print ("pre-prediction: ", prediction)
         except Exception as e:
             return {"status": "Error", "message": str(e)}
 

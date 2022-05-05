@@ -8,7 +8,7 @@ from apps.ml.registry import MLRegistry
 class MLTests(TestCase):
     def test_rf_algorithm(self):
         input_data ={
-            "we may share personal data with card networks and payment processor"
+            "paragraph": "we may share personal data with card networks and payment processor"
         } 
         # input_data = pd.DataFrame(input_data, index=[0])
         # print (input_data)
