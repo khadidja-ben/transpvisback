@@ -1,7 +1,6 @@
 from tkinter.tix import InputOnly
 import pickle
 import os
-import pandas as pd
 from scipy.sparse import csr_matrix
 
 class NaiveBayesClassifier:
@@ -22,7 +21,7 @@ class NaiveBayesClassifier:
         return csr_matrix.toarray(data)
 
     # the method that calls ML for computing predictions on prepared data
-    def predictProcess(self, input_data):
+    def predict(self, input_data):
         return self.model.predict_proba(input_data)
 
     # the method that applies post-processing on prediction values
@@ -36,7 +35,7 @@ class NaiveBayesClassifier:
     def compute_prediction(self, input_data):
         try:
             input = self.preprocessing(input_data)
-            prediction = self.predictProcess(input)[0]
+            prediction = self.predict(input)[0]
             prediction = self.postprocessing(prediction)
         except Exception as e:
             return {"status": "Error", "message": str(e)}

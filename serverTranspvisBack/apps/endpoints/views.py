@@ -102,6 +102,5 @@ class PredictView(views.APIView):
 
         prediction["request_id"] = ml_request.id
         prediction["data"] = request.data
-        # prediction["understand"] = ml_request.input_data
 
         return Response(prediction)
