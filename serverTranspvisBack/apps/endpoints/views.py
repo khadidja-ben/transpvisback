@@ -8,6 +8,13 @@ from serverTranspvisBack.wsgi import registry
 from rest_framework import viewsets
 from rest_framework import mixins
 
+from django.shortcuts import render
+from apps.ml.income_classifier.textGenerator import TextGenerator
+from django.http import JsonResponse
+
+from keras.preprocessing.sequence import pad_sequences
+from keras.preprocessing.text import Tokenizer
+
 from apps.endpoints.models import Endpoint
 from apps.endpoints.serializers import EndpointSerializer
 
@@ -100,6 +107,40 @@ class PredictView(views.APIView):
         )
         ml_request.save()
 
+        prediction["request_id"] = ml_request.id
+        prediction["data"] = request.data
+
+        return Response(prediction)
+
+# # Home Page
+# def home(request):
+#     context = {
+#     }
+#     return render(request, 'sentiAnalyzerApp/home.html', context)
+
+class PredictLSTMView(views.APIView):
+
+    def post(self, request, endpoint_name, format=None):
+
+        algs = MLAlgorithm.objects.filter(parent_endpoint__name = endpoint_name)
+        if len(algs) == 0:
+            return Response(
+                {"status": "Error", "message": "ML algorithm is not available"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        alg_index = 1
+        algorithm_object = registry.endpoints[2]
+        prediction = algorithm_object.compute_prediction(request.data)
+        summary = prediction["summary"] if "summary" in prediction else "error"
+        print("summary", summary)
+        ml_request = MLRequest(
+            input_data=json.dumps(request.data),
+            full_response=prediction,
+            response=summary,
+            feedback="",
+            parent_mlalgorithm=algs[alg_index],
+        )
+        ml_request.save()
         prediction["request_id"] = ml_request.id
         prediction["data"] = request.data
 

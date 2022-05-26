@@ -16,6 +16,7 @@ application = get_wsgi_application()
 import inspect
 from apps.ml.registry import MLRegistry
 from apps.ml.income_classifier.naiveBayes import NaiveBayesClassifier
+from apps.ml.income_classifier.textGenerator import TextGenerator
 
 try:
     registry = MLRegistry() # create ML registry
@@ -30,6 +31,16 @@ try:
                             owner="khadidja",
                             algorithm_description="Naive Bayes with simple pre- and post-processing",
                             algorithm_code=inspect.getsource(NaiveBayesClassifier))
+
+    lstm = TextGenerator()
+    registry.add_algorithm(endpoint_name="income_classifier",
+                            algorithm_object=lstm,
+                            algorithm_name="LSTM",
+                            algorithm_status="production",
+                            algorithm_version="0.0.1",
+                            owner="khadidja",
+                            algorithm_description="Naive Bayes with simple pre- and post-processing",
+                            algorithm_code=inspect.getsource(TextGenerator))
 
 except Exception as e:
     print("Exception while loading the algorithms to the registry,", str(e))
