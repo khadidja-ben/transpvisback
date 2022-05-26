@@ -112,12 +112,6 @@ class PredictView(views.APIView):
 
         return Response(prediction)
 
-# # Home Page
-# def home(request):
-#     context = {
-#     }
-#     return render(request, 'sentiAnalyzerApp/home.html', context)
-
 class PredictLSTMView(views.APIView):
 
     def post(self, request, endpoint_name, format=None):
@@ -132,7 +126,6 @@ class PredictLSTMView(views.APIView):
         algorithm_object = registry.endpoints[2]
         prediction = algorithm_object.compute_prediction(request.data)
         summary = prediction["summary"] if "summary" in prediction else "error"
-        print("summary", summary)
         ml_request = MLRequest(
             input_data=json.dumps(request.data),
             full_response=prediction,
@@ -141,6 +134,34 @@ class PredictLSTMView(views.APIView):
             parent_mlalgorithm=algs[alg_index],
         )
         ml_request.save()
+        prediction["request_id"] = ml_request.id
+        prediction["data"] = request.data
+
+        return Response(prediction)
+
+class PredictClassView(views.APIView):
+    def post(self, request, endpoint_name, format=None):
+
+        algs = MLAlgorithm.objects.filter(parent_endpoint__name = endpoint_name)
+        if len(algs) == 0:
+            return Response(
+                {"status": "Error", "message": "ML algorithm is not available"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        alg_index = 0
+        algorithm_object = registry.endpoints[3]
+        prediction = algorithm_object.compute_prediction(request.data)
+
+        label = prediction["label"] if "label" in prediction else "error"
+        ml_request = MLRequest(
+            input_data=json.dumps(request.data),
+            full_response=prediction,
+            response=label,
+            feedback="",
+            parent_mlalgorithm=algs[alg_index],
+        )
+        ml_request.save()
+
         prediction["request_id"] = ml_request.id
         prediction["data"] = request.data
 

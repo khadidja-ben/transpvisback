@@ -17,12 +17,12 @@ import inspect
 from apps.ml.registry import MLRegistry
 from apps.ml.income_classifier.naiveBayes import NaiveBayesClassifier
 from apps.ml.income_classifier.textGenerator import TextGenerator
+from apps.ml.income_classifier.classifier2 import Classifier2
 
 try:
     registry = MLRegistry() # create ML registry
     # Naive Bayes Classifier
     nv = NaiveBayesClassifier()
-    # add to ML registry
     registry.add_algorithm(endpoint_name="income_classifier",
                             algorithm_object=nv,
                             algorithm_name="Naive Bayes",
@@ -39,8 +39,18 @@ try:
                             algorithm_status="production",
                             algorithm_version="0.0.1",
                             owner="khadidja",
-                            algorithm_description="Naive Bayes with simple pre- and post-processing",
+                            algorithm_description="LSTM - Long Short Memory",
                             algorithm_code=inspect.getsource(TextGenerator))
+
+    nv2 = Classifier2()
+    registry.add_algorithm(endpoint_name="income_classifier",
+                            algorithm_object=nv2,
+                            algorithm_name="Naive Bayes",
+                            algorithm_status="production",
+                            algorithm_version="0.0.1",
+                            owner="khadidja",
+                            algorithm_description="Naive Bayes",
+                            algorithm_code=inspect.getsource(Classifier2))
 
 except Exception as e:
     print("Exception while loading the algorithms to the registry,", str(e))
