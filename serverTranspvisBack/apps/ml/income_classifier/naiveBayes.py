@@ -1,4 +1,3 @@
-from tkinter.tix import InputOnly
 import pickle
 import os
 from scipy.sparse import csr_matrix
