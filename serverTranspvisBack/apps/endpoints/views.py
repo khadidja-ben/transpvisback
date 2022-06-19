@@ -12,7 +12,7 @@ from django.shortcuts import render
 from apps.ml.income_classifier.textGenerator import TextGenerator
 from django.http import JsonResponse
 
-from keras.preprocessing.sequence import pad_sequences
+# from keras.preprocessing.sequence import pad_sequences
 from keras.preprocessing.text import Tokenizer
 
 from apps.endpoints.models import Endpoint
