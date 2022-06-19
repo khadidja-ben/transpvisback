@@ -19,13 +19,13 @@ class TextGenerator:
             os.path.join(CURRENT_DIR, '../../../machineLearning/')
         )
         # Model Loading
-        with open(TEMPLATE_DIRS + "model.json", 'rb') as json_file:
+        with open(TEMPLATE_DIRS + "TextGenerator/model.json", 'rb') as json_file:
             self.loaded_model_json = json_file.read()
         json_file.close()
-        self.in_tokenizer = pickle.load(open(TEMPLATE_DIRS + "in_tokenizer.pkl", "rb"))
-        self.tr_tokenizer = pickle.load(open(TEMPLATE_DIRS + "tr_tokenizer.pkl", "rb"))
+        self.in_tokenizer = pickle.load(open(TEMPLATE_DIRS + "TextGenerator/in_tokenizer.pkl", "rb"))
+        self.tr_tokenizer = pickle.load(open(TEMPLATE_DIRS + "TextGenerator/tr_tokenizer.pkl", "rb"))
         self.loaded_model = model_from_json(self.loaded_model_json)
-        self.loaded_model.load_weights(TEMPLATE_DIRS + "model.h5")
+        self.loaded_model.load_weights(TEMPLATE_DIRS + "TextGenerator/model.h5")
 
     # Method to create clean text
     def clear(self, text):

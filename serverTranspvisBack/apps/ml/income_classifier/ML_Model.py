@@ -25,19 +25,19 @@ class MLModel:
         TEMPLATE_DIRS = (
             os.path.join(CURRENT_DIR, '../../../machineLearning/')
         )
-        self.model_classifier1 = pickle.load(open(TEMPLATE_DIRS + "naive_bayes.pkl", "rb"))
-        self.vectorizer_from_train_data_classifier1 = pickle.load(open(TEMPLATE_DIRS + "count_vectorizer.pkl", "rb"))
+        self.model_classifier1 = pickle.load(open(TEMPLATE_DIRS + "Classifier1/naive_bayes.pkl", "rb"))
+        self.vectorizer_from_train_data_classifier1 = pickle.load(open(TEMPLATE_DIRS + "Classifier1/count_vectorizer.pkl", "rb"))
 
-        with open(TEMPLATE_DIRS + "model.json", 'rb') as json_file:
+        with open(TEMPLATE_DIRS + "TextGenerator/model.json", 'rb') as json_file:
             self.loaded_model_json = json_file.read()
         json_file.close()
-        self.in_tokenizer = pickle.load(open(TEMPLATE_DIRS + "in_tokenizer.pkl", "rb"))
-        self.tr_tokenizer = pickle.load(open(TEMPLATE_DIRS + "tr_tokenizer.pkl", "rb"))
+        self.in_tokenizer = pickle.load(open(TEMPLATE_DIRS + "TextGenerator/in_tokenizer.pkl", "rb"))
+        self.tr_tokenizer = pickle.load(open(TEMPLATE_DIRS + "TextGenerator/tr_tokenizer.pkl", "rb"))
         self.loaded_model = model_from_json(self.loaded_model_json)
-        self.loaded_model.load_weights(TEMPLATE_DIRS + "model.h5")
+        self.loaded_model.load_weights(TEMPLATE_DIRS + "TextGenerator/model.h5")
 
-        self.model_classifier2 = pickle.load(open(TEMPLATE_DIRS + "naive_bayes_2.pkl", "rb"))
-        self.vectorizer_from_train_data_classifier2 = pickle.load(open(TEMPLATE_DIRS + "count_vectorizer_2.pkl", "rb"))
+        self.model_classifier2 = pickle.load(open(TEMPLATE_DIRS + "Classifier2/naive_bayes_2.pkl", "rb"))
+        self.vectorizer_from_train_data_classifier2 = pickle.load(open(TEMPLATE_DIRS + "Classifier2/count_vectorizer_2.pkl", "rb"))
 
     # the method applies pre-processing
     def preprocessing_classifier1(self, input_data):
@@ -80,6 +80,8 @@ class MLModel:
     # predict method
     def predict_text_generator(self, input_data):
         prediction = self.decode_sequence_beamsearch_text_generator((self.clear_text_generator(input_data)).reshape(1,707))
+        if 'end' in prediction :
+            prediction = prediction.replace('end','')
         return prediction
 
     # the method that applies post-processing on prediction values
@@ -171,7 +173,7 @@ class MLModel:
         beam_probs = []
         beam_words = []
         
-        BSIZE = 4
+        BSIZE = 6
         cpt = True
         
         while not stop_condition: 

@@ -9,8 +9,8 @@ class NaiveBayesClassifier:
         TEMPLATE_DIRS = (
             os.path.join(CURRENT_DIR, '../../../machineLearning/')
         )
-        self.model = pickle.load(open(TEMPLATE_DIRS + "naive_bayes.pkl", "rb"))
-        self.vectorizer_from_train_data = pickle.load(open(TEMPLATE_DIRS + "count_vectorizer.pkl", "rb"))
+        self.model = pickle.load(open(TEMPLATE_DIRS + "Classifier1/naive_bayes.pkl", "rb"))
+        self.vectorizer_from_train_data = pickle.load(open(TEMPLATE_DIRS + "Classifier1/count_vectorizer.pkl", "rb"))
 
     # the method applies pre-processing
     def preprocessing(self, input_data):
