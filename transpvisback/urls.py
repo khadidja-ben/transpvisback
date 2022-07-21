@@ -10,4 +10,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include("transparency.urls")),
     path("api/", include("authentication.urls")),
+    # path("api/", include("serverTranspvisBack.apps.endpoints.urls")),
 ]

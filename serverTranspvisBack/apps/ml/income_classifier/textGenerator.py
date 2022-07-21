@@ -33,13 +33,13 @@ class TextGenerator:
         cleanText = pad_sequences(
             self.in_tokenizer.texts_to_sequences([self.preprocess_text(txt)]),
             padding='post',
-            maxlen=707
+            maxlen=347
         )
         return cleanText
 
     # predict method
     def predict(self, input_data):
-        prediction = self.decode_sequence_beamsearch((self.clear(input_data)).reshape(1,707))
+        prediction = self.decode_sequence_beamsearch((self.clear(input_data)).reshape(1,347))
         if 'end' in prediction :
             prediction = prediction.replace('end','')
         return prediction
@@ -81,7 +81,7 @@ class TextGenerator:
     
         dec_state_input_h = Input(shape=(latent_dim,))
         dec_state_input_c = Input(shape=(latent_dim,))
-        dec_hidden_state_input = Input(shape=(707,latent_dim))
+        dec_hidden_state_input = Input(shape=(347,latent_dim))
         
         # Get the embeddings and input layer from the model
         dec_inputs = self.loaded_model.input[1]

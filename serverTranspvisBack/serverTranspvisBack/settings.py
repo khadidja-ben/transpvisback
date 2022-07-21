@@ -25,7 +25,38 @@ SECRET_KEY = 's6%h2t^v5zaj1bf4q#+=c9l1ankueecx4!svvp+djf=_jhqcf6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+CORS_ALLOW_HEADERS = (
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+    "Pragma",
+    "Cache-Control",
+)
+
+CORS_ORIGIN_WHITELIST = (
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+)
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+ACCESS_CONTROL_ALLOW_ORIGIN = "http://localhost:3000"
+
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -38,6 +69,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    "corsheaders",
+
      # apps
     'apps.endpoints',
     'apps.ml'
@@ -50,6 +83,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 

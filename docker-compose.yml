@@ -9,7 +9,7 @@ services:
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
     volumes:
-      - transpvisback-postgres-data:/var/lib/postgresql/data
+      - ./transpvisback-postgres-data:/var/lib/postgresql/data
     build:
       context: ./
       dockerfile: db-transpvisback.Dockerfile
@@ -28,13 +28,32 @@ services:
     build:
       context: ./
       dockerfile: api-transpvisback.Dockerfile
-    command: python3 manage.py runserver 0.0.0.0:8000
+    command: python3 manage.py runserver 0.0.0.0:8080
     volumes:  
       - .:/code
     ports:
-      - "8000:8000"
+      - "8080:8080"
     depends_on:
       - db-transpvisback
 
-volumes:
-  transpvisback-postgres-data:
+#   nginx:
+#     restart: always
+#     image: nginx:1.12-alpine
+#     ports:
+#         - 8000:8000
+#     volumes:
+#         - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+#         - static_volume:/app/serverTranspvisBack/static
+
+#   wsgiserver:
+#     build:
+#         context: .
+#         dockerfile: ./docker/backend/Dockerfile
+#     entrypoint: /app/docker/backend/wsgi-entrypoint.sh
+#     volumes:
+#         - static_volume:/app/serverTranspvisBack/static
+#     expose:
+#         - 8000
+
+# volumes:
+#     static_volume: {}

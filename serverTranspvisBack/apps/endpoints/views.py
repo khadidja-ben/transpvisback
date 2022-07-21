@@ -2,14 +2,14 @@ import json
 from numpy.random import rand
 from rest_framework import views, status
 from rest_framework.response import Response
-from apps.ml.registry import MLRegistry
+# from apps.ml.registry import MLRegistry
 from serverTranspvisBack.wsgi import registry
 
 from rest_framework import viewsets
 from rest_framework import mixins
 
 from django.shortcuts import render
-from apps.ml.income_classifier.textGenerator import TextGenerator
+# from apps.ml.income_classifier.textGenerator import TextGenerator
 from django.http import JsonResponse
 
 # from keras.preprocessing.sequence import pad_sequences
@@ -178,7 +178,9 @@ class PredictionFunctionView(views.APIView):
             )
         alg_index = 0
         algorithm_object = registry.endpoints[4]
-        prediction = algorithm_object.mlmodel(request.data)
+        data = request.data["paragraph"]
+        print (data)
+        prediction = algorithm_object.mlmodel(data)
 
         label = prediction["label"] if "label" in prediction else "error"
         ml_request = MLRequest(
@@ -195,33 +197,78 @@ class PredictionFunctionView(views.APIView):
 
         return Response(prediction)
 
-# class MlModelTextView(views.APIView):
-#     def post(self, request, endpoint_name, format=None):
 
-#         algs = MLAlgorithm.objects.filter(parent_endpoint__name = endpoint_name)
-#         if len(algs) == 0:
-#             return Response(
-#                 {"status": "Error", "message": "ML algorithm is not available"},
-#                 status=status.HTTP_400_BAD_REQUEST,
-#             )
-#         alg_index = 0
-#         algorithm_object = registry.endpoints[4]
-#         prediction = algorithm_object.mlmodeltext(request.data)
+class paragraphs(views.APIView):
+    def post (self, request, endpoint_name, format=None):
+        data = request.data["paragraph"]
+        data= data.split("\n")
+        # print ("data :::::::::::::::::", data)
+        print("Number of paragraphs is : ", len(data))
+        # delete empty lines from the document 
+        table = []
+        for index, p in enumerate(data): 
+            if data[index] == "":
+                del data[index]
+            else: 
+                table.append(data[index])
+            
+        print("Number of paragraphs is : ", len(data))
+        # print ("table", table)
+        # prediction["data"] = request.data
+        return Response(table)
 
-#         label = prediction["data"] if "data" in prediction else "error"
-#         ml_request = MLRequest(
-#             input_data=json.dumps(request.data),
-#             full_response=prediction,
-#             response=label,
-#             feedback="",
-#             parent_mlalgorithm=algs[alg_index],
-#         )
-#         ml_request.save()
+class PredictionFunctionViewFull(views.APIView):
+    def post(self, request, endpoint_name, format=None):
 
-#         # prediction["request_id"] = ml_request.id
-#         # prediction["data"] = request.data
+        algs = MLAlgorithm.objects.filter(parent_endpoint__name = endpoint_name)
+        if len(algs) == 0:
+            return Response(
+                {"status": "Error", "message": "ML algorithm is not available"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        alg_index = 0
+        algorithm_object = registry.endpoints[4]
+        data = request.data
+        print("data = ",data)
+        data= data.split("\n")
+        table = []
+        for index, p in enumerate(data): 
+            if data[index] == "":
+                del data[index]
+            else: 
+                table.append(data[index])
+        # print(table)        
+        predictionResults = []
+        for x in table:
+            print ("xxxxxx = ",x)
+            prediction = algorithm_object.mlmodel(x)
+            label = prediction["label"] if "label" in prediction else "error"
+            ml_request = MLRequest(
+                input_data=json.dumps(x),
+                full_response=prediction,
+                response=label,
+                feedback="",
+                parent_mlalgorithm=algs[alg_index],
+            )
+            ml_request.save()
+            prediction["request_id"] = ml_request.id
+            predictionResults.append(prediction)
+            print (prediction ["summary"])
+        
+        return Response(predictionResults)
 
-#         return Response(prediction)
+        # prediction = algorithm_object.mlmodel(data)
 
+        # label = prediction["label"] if "label" in prediction else "error"
+        # ml_request = MLRequest(
+        #     input_data=json.dumps(request.data),
+        #     full_response=prediction,
+        #     response=label,
+        #     feedback="",
+        #     parent_mlalgorithm=algs[alg_index],
+        # )
+        # ml_request.save()
 
+        # prediction["request_id"] = ml_request.id
+        # prediction["data"] = request.data
 

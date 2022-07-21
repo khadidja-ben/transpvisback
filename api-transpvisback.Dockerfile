@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3.9
 
 # install sudo
 RUN apt-get update && apt-get install -y sudo && rm -rf /var/lib/apt/lists/*
@@ -11,7 +11,7 @@ RUN sudo apt-get -qq update
 RUN sudo apt-get install postgresql-client-12 -y
 
 # create and define workdir
-RUN mkdir /code
+# RUN mkdir /code
 WORKDIR /code
 
 # add and install requirements

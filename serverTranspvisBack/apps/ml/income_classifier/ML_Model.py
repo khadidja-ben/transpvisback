@@ -41,8 +41,9 @@ class MLModel:
 
     # the method applies pre-processing
     def preprocessing_classifier1(self, input_data):
-        words = input_data["paragraph"]
-        data = self.vectorizer_from_train_data_classifier1.transform([words])
+        # words = input_data["paragraph"]
+        # print (words)
+        data = self.vectorizer_from_train_data_classifier1.transform([input_data])
         # JSON to array
         return csr_matrix.toarray(data)
 
@@ -69,17 +70,18 @@ class MLModel:
 
     # Method to create clean text
     def clear_text_generator(self, text):
-        txt = text["paragraph"]
+        # txt = text["paragraph"]
+        txt = text
         cleanText = pad_sequences(
             self.in_tokenizer.texts_to_sequences([self.preprocess_text_text_generator(txt)]),
             padding='post',
-            maxlen=707
+            maxlen=347
         )
         return cleanText
 
     # predict method
     def predict_text_generator(self, input_data):
-        prediction = self.decode_sequence_beamsearch_text_generator((self.clear_text_generator(input_data)).reshape(1,707))
+        prediction = self.decode_sequence_beamsearch_text_generator((self.clear_text_generator(input_data)).reshape(1,347))
         if 'end' in prediction :
             prediction = prediction.replace('end','')
         return prediction
@@ -121,7 +123,7 @@ class MLModel:
     
         dec_state_input_h = Input(shape=(latent_dim,))
         dec_state_input_c = Input(shape=(latent_dim,))
-        dec_hidden_state_input = Input(shape=(707,latent_dim))
+        dec_hidden_state_input = Input(shape=(347,latent_dim))
         
         # Get the embeddings and input layer from the model
         dec_inputs = self.loaded_model.input[1]
@@ -285,7 +287,7 @@ class MLModel:
                 text = self.compute_prediction_text_generator(input_data)
                 summary = text['summary']
                 classification = self.compute_prediction_classifier2(summary)
-                return {"paragraph":input_data['paragraph'],"summary": text['summary'], "label": classification['label'], "status": "OK"}
+                return {"paragraph":input_data,"summary": text['summary'], "label": classification['label'], "status": "OK"}
             else:
                 return{"input doesn't contain IE"}
         except Exception as e:
