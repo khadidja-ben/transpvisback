@@ -133,7 +133,7 @@ class TextGenerator:
         beam_probs = []
         beam_words = []
         
-        BSIZE = 4
+        BSIZE = 1
         cpt = True
         
         while not stop_condition: 

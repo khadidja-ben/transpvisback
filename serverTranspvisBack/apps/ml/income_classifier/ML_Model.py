@@ -175,7 +175,7 @@ class MLModel:
         beam_probs = []
         beam_words = []
         
-        BSIZE = 6
+        BSIZE = 1
         cpt = True
         
         while not stop_condition: 

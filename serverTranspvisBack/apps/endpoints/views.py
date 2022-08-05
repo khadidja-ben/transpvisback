@@ -193,7 +193,7 @@ class PredictionFunctionView(views.APIView):
         ml_request.save()
 
         prediction["request_id"] = ml_request.id
-        prediction["data"] = request.data
+        # prediction["data"] = request.data
 
         return Response(prediction)
 
@@ -243,6 +243,7 @@ class PredictionFunctionViewFull(views.APIView):
             print ("xxxxxx = ",x)
             prediction = algorithm_object.mlmodel(x)
             label = prediction["label"] if "label" in prediction else "error"
+            # if information element already exists no need to add it !
             ml_request = MLRequest(
                 input_data=json.dumps(x),
                 full_response=prediction,
@@ -252,9 +253,20 @@ class PredictionFunctionViewFull(views.APIView):
             )
             ml_request.save()
             prediction["request_id"] = ml_request.id
-            predictionResults.append(prediction)
-            print (prediction ["summary"])
-        
+            if (prediction["summary"] not in predictionResults):
+                predictionResults.append(prediction)
+                print (prediction ["summary"])
+
+        # predictionResults.append({'summary': 'personal information', 'label': 'data'})
+        # predictionResults.append({'summary': 'payment information', 'label': 'data'})
+        # predictionResults.append({'summary': 'cookies information', 'label': 'policy'})
+        # predictionResults.append({'summary': 'provide services', 'label': 'policy'})
+        # predictionResults.append({'summary': 'assuring security', 'label':'process'})
+        # predictionResults.append({'summary': 'personalize experience', 'label':'process'})
+
+        print(predictionResults)
+# return {"paragraph":input_data,"summary": text['summary'], "label": classification['label'], "status": "OK"}
+
         return Response(predictionResults)
 
         # prediction = algorithm_object.mlmodel(data)

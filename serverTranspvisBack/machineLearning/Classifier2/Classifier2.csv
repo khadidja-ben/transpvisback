@@ -1,103 +1,102 @@
 information element,classe
-the purpose of collecting data,policy
-the purpose of collecting additional data,policy
-why collecting the account information,policy
+personal data,data
+additional data,data
+why collecting account information,policy
 where delivered messages are stored,data
 how to deal with undelivered messages,process
 how to deal with forwarded media,process
-the purpose of using end to end encryption,policy
-how to deal with contact upload feature,process
-collecting payment information,data
-the collected data for customer support and any form of communications,data
-collecting log information,data
-collecting device and connection information,data
-the purpose for collecting location information,policy
+using end to end encryption,policy
+deal with contact upload feature,process
+payment information,data
+the collected data for customer support,data
+log information,data
+device and connection information,data
+location information,data
 cookies,policy
-collecting information provided by other users about you,data
+information provided by other users,data
 screenshots and recordings,data
-collecting data in case of reporting violations about the reported and the reporter,data
-collecting data from viewers,data
-data collected from customers,data
-the purpose of collecting customer's customer data,policy
-the purpose of using tracking technologies,policy
+reporting violations,data
+data from viewers,data
+customers information,data
+customer data,data
+tracking technologies,policy
 web beacons,policy
 using headers,policy
-the purpose of using log information,policy
-the purpose of using analytics services,policy
+log information,data
+analytics services,policy
 do not track option in brower,policy
-the process of assuring security,process
-using the collected information to deliver screenrec services,policy
-collecting data for internal business purposes,policy
-using the collected information to send customers information and updates,policy
+assuring security,process
+provide services,policy
+internal business purposes,policy
+customers information,data
 sharing data with customers,data
-sharing data with thirdparties to provide services,policy
-sharing data with thirdparties for special requests,policy
-sharing data with current affiliates corporates,data
-the purpose of sharing data with buyer investors ,policy
-the reason of sharing data with the authorities,policy
-the process of handling payments,process
-the process of using cross device tracking,process
+provide services,policy
+special requests data,policy
+affiliates corporates,data
+buyer investors,policy
+sharing data with the authorities,policy
+handling payments,process
+using cross device tracking,process
 using aggregated information,process
-the purpose of collecting data automatically,policy
+automatically collected information,data
 where data is being processed,data
-purposes of retaining information,policy
-the process of assuring accuracy of information,process
-the process of accessing and correcting or deleting personal information,process
-the process of responding to requests about personal information,process
-collecting basic pc information,data
-collecting basic information on internet use,data
-using apec privacy principles for privacy protection,data
-synchronizing data between devices using naver id,data
-the process of recommendation proposal of search terms,process
-transmitting search terms to other search engines,policy
+retaining information,data
+assuring accuracy of information,process
+deleting personal information,data
+responding to requests about personal information,process
+basic pc information,data
+basic information on internet use,data
+privacy protection,data
+synchronizing data between devices,data
+recommendation proposal of search terms,process
+transmitting search terms,policy
 data synchronization,data
 sending notification for safety,data
-collecting data for detecting forged websites using safe browsing,policy
+detecting forged websites,data
 the process of detecting maware,process
-the process of blocking access to suspicious websites trying to install harmful programs,process
-the process ofusing autofill function,process
-ynchronizing the autofill data between different browsers,data
-the process of using location information,process
-the process of collecting location information for websites,process
-the purpose of collecting data when using the download function,policy
+blocking access to suspicious websites,process
+using autofill function,process
+synchronizing the autofill data,data
+location information,data
+location information for websites,process
+download function,data
 what is personal data,data
-,the purose of collecting data to provide software service,policy
-the purose of collecting data to protect from piracy and unlawful use,policy
-the purose of collecting data to to improve offerings,policy
-the purose of collecting data for internal records,policy
-the purose of collecting data to promote software,policy
-the purose of collecting data to  fulfil legal duties,policy
-what are the collected information by jetbrains,data
-what information is sent to JetBrains while installaton and excution,data
-what is the anonymous data collection through the product,data
-collecting basic subscription information,data
+provide service,policy
+protect from unlawful use,policy
+improve offerings,data
+internal records,data
+promote software,data
+fulfil legal duties,policy
+installaton and excution information,data
+anonymous information,data
+subscription information,data
 collecting data automatically,data
-using thirdparty tracking tools,policy
-what is collected software data ,data
-what is collected operation data,data
+tracking tools,policy
+software data,data
+operation data,data
 what is metadata,data
-collecting data related use of the services,data
-collecting information sent by mobile device,data
-how to collect location data,process
-the purpose of collecting information received from partners,policy
-the purpose of collecting contact information,policy
-the purpose of collecting information to  to provide services,policy
-the purpose of collecting data to improve services,policy
-the purpose of collecting data to protect security,policy
-the purpose of collecting data to comply with legal obligations,policy
-the purpose of collecting data to improve wps services,policy
-collecting data for communication purposes ,policy
+use of the services information,data
+mobile device information,data
+location data,data
+information received from partners,data
+contact information,data
+provide services,policy
+improve services,policy
+protect security,policy
+comply with legal obligations,policy
+improve services,policy
+communication information,data
 data is only collected with permisson,data
-the purpose of collecting nonpersonal data,policy
-how to protect the anonymity of nonpersonal data,process
-the purpose of sharing information with service providers,policy
-the purpose of sharing data with advertisement providers,policy
-the purpose of sharing information with software development kit sdk,policy
-the purpose of sharing information in connection with business transactions,policy
-the purpose of sharing nonpersonal dara for industry research,policy
+nonpersonal data,data
+anonymity of nonpersonal data,process
+sharing information with service providers,policy
+advertisement providers,data
+software development kit sdk,policy
+business transactions information,data
+industry research,data
 with whom information is shared,data
-transfering personal information to deliver services 
-receiving information about processed personal data,data
+deliver services,policy
+processed personal data,data
 correcting inaccurate information,data
 withdrawing consent,data
 right to erasure,data
@@ -106,10 +105,46 @@ filling complaints,data
 how to see updates and delete information,process
 protecting information,data
 how to protect security,process
-storing data locally when using downloadable applications,data
+storing data locally,data
 synchronizing devices with service,data
-data is processed according to where it is stored ,data
 how long information is retained,data
 policy towards children,policy
 children and parents,policy
 how links to thirdparties work,process
+opt out of communications,policy
+marketing information emails,data
+contacting users,data
+improve products,data
+personalize experience,process
+informing about services,data
+payment information,data
+generated data,data
+personal information,data
+update information,process
+cloud storage,policy
+payment processors,process
+advertising information,data
+analytics information,policy
+link clicks,process
+personalize products,data
+advertise and market,process
+analyzing performance meeting,policy
+ways of processing data,process
+automated processing methods,process
+cookies information,policy
+third party and personal information,data
+protecting the safety of the company,data
+participate in interactive features,data
+provide customer support,data
+gather analysis,data
+monitor the service usage,data
+address technical issues,data
+fullfill users provided purposes,data
+data transfer,data
+agreement to privacy policy,policy
+education information,data
+other information users provide,data
+financial information,data
+internet activity information,data
+professional and employment related information,data
+information from other sources,data
